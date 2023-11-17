@@ -1,4 +1,4 @@
-From 4fe35825fcfee5e2d46b76392af5cdf6a82223fc Mon Sep 17 00:00:00 2001
+From d641519c0a892279d99c9e0232d22664e2e9b342 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 25 Dec 2019 12:34:05 +0200
 Subject: [PATCH 2/2] Rework securize tweak
@@ -9,7 +9,7 @@ Subject: [PATCH 2/2] Rework securize tweak
  2 files changed, 30 insertions(+), 20 deletions(-)
 
 diff --git a/base.mk b/base.mk
-index 2c4f927..c41e920 100644
+index fd612fc..bffcf1e 100644
 --- a/base.mk
 +++ b/base.mk
 @@ -181,7 +181,6 @@ PRODUCT_PACKAGES += \
@@ -21,10 +21,10 @@ index 2c4f927..c41e920 100644
  
  PRODUCT_COPY_FILES += \
 diff --git a/rw-system.sh b/rw-system.sh
-index 83a09e4..2c1b7f9 100644
+index 0088ece..93b31f8 100644
 --- a/rw-system.sh
 +++ b/rw-system.sh
-@@ -754,32 +754,59 @@ copyprop() {
+@@ -759,32 +759,59 @@ copyprop() {
          resetprop_phh "$1" "$(getprop "$2")"
      fi
  }
@@ -87,7 +87,7 @@ index 83a09e4..2c1b7f9 100644
      (getprop ro.vendor.build.security_patch; getprop ro.keymaster.xxx.security_patch) |sort |tail -n 1 |while read v;do
          [ -n "$v" ] && resetprop_phh ro.build.version.security_patch "$v"
      done
-@@ -798,22 +825,6 @@ if [ -f /system/phh/secure ] || [ -f /metadata/phh/secure ];then
+@@ -803,22 +830,6 @@ if [ -f /system/phh/secure ] || [ -f /metadata/phh/secure ];then
  
      resetprop_phh ro.adb.secure 1
  
