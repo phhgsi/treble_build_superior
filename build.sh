@@ -2,21 +2,21 @@
 
 echo
 echo "--------------------------------------"
-echo "          AOSP 14.0 Buildbot          "
+echo "   Superior-extended 14.0 Buildbot    "
 echo "                  by                  "
-echo "                ponces                "
+echo "                phhgsi                "
 echo "--------------------------------------"
 echo
 
 set -e
 
-BL=$PWD/treble_aosp
+BL=$PWD/treble_build_superior
 BD=$HOME/builds
 
 initRepos() {
     if [ ! -d .repo ]; then
         echo "--> Initializing workspace"
-        repo init -u https://android.googlesource.com/platform/manifest -b android-14.0.0_r31 --git-lfs
+        repo init -u https://github.com/SuperiorExtended/manifest -b thirteen --git-lfs
         echo
 
         echo "--> Preparing local manifest"
@@ -44,8 +44,8 @@ applyPatches() {
 
     echo "--> Generating makefiles"
     cd device/phh/treble
-    cp $BL/build/aosp.mk .
-    bash generate.sh aosp
+    cp $BL/build/superior.mk .
+    bash generate.sh superior
     cd ../../..
     echo
 }
